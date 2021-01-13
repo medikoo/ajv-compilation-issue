@@ -1,0 +1,36 @@
+{
+  "service": {
+    "name": "test-function-ac3j7j5"
+  },
+  "configValidationMode": "error",
+  "frameworkVersion": "*",
+  "provider": {
+    "name": "aws",
+    "stage": "dev",
+    "variableSyntax": "\\${([^{}:]+?(?:\\(|:)(?:[^:{}][^{}]*?)?)}",
+    "region": "us-east-1",
+    "versionFunctions": true
+  },
+  "functions": {
+    "foo": {
+      "handler": "myLambdaAtEdge.handler",
+      "events": [
+        {
+          "cloudFront": {
+            "origin": "s3://bucketname.s3.amazonaws.com/files",
+            "eventType": "viewer-response",
+            "cachePolicy": {
+              "name": "not-existing-cache-policy"
+            }
+          }
+        }
+      ],
+      "name": "test-function-ac3j7j5-dev-foo"
+    },
+    "other": {
+      "handler": "index.handler",
+      "events": [],
+      "name": "test-function-ac3j7j5-dev-other"
+    }
+  }
+}
